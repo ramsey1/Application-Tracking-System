@@ -1,0 +1,1 @@
+export const roles=["Technical Interviewer","Human Resource Interviewer","Managerial Interviewer"];

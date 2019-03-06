@@ -1,0 +1,76 @@
+<div class="post-jobs">
+<div class="container border border-secondary rounded  h-100 w-100">
+  <div class="row mx-auto">
+    <div class="col-12">
+      <h1>Post a Job</h1>
+      <br>
+      <form [formGroup]="postJobs" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+              <label for="jobCode">Job Code:</label>
+              <input type="text" formControlName="jobCode" class="form-control" id="jobCode" placeholder="Enter Job Code" name="jobCode">
+            </div>
+
+            <div class="form-group">
+              <label for="Profile">Profile:</label>
+              <input type="text" formControlName="jobProfile" class="form-control" id="profile" placeholder="Enter Job Profile" name="profile">
+            </div>
+
+            <div class="form-group">
+              <label for="vacancies">Vacancies:</label>
+              <input type="number" formControlName="vacancies" class="form-control" id="vacancies" placeholder="Enter Job vacancies" name="vacancies" min="1">
+            </div>
+
+            <div class="form-group">
+              <label for="baseSal">Base Salary:</label>
+              <input type="text" formControlName="baseSal" class="form-control" id="baseSal" placeholder="Enter Base Salary" name="baseSal">
+            </div>
+
+              
+            <div class="form-group">
+              <label for="enroll">Enrollment Type:</label>
+              <select name="" id="" class="form-control" formControlName="enrollType">
+                  <option *ngFor="let enroll of enroll" [value]="enroll">{{enroll}}</option>
+                  </select>
+            </div>
+
+            <div class="form-group">
+              <label for="location">Job Location:</label>
+              <input type="text" formControlName="jobLoc" class="form-control" id="location" placeholder="Enter Job Location" name="location">
+            </div>
+
+            <div class="form-group">
+              <label for="desc">Job Description:</label>
+              <input type="text" formControlName="jobDesc" class="form-control description" id="desc" placeholder="Enter Job Description" name="desc" >
+            </div>
+
+            <div class="form-group">
+              <label for="edReq">Education Requirement:</label>
+              <select name="" id="" class="form-control" formControlName="eductReq">
+                  <option *ngFor="let hgd of highestGraduation" [value]="hgd">{{hgd}}</option>
+                  </select>
+            </div>
+
+            <div class="form-group">
+              <label for="skillsReq">Skills Requirement:</label>
+              <input type="text" formControlName="skillsReq" class="form-control" id="skillsReq" placeholder="Skills Required" name="skillsReq">
+            </div>
+
+            <div class="form-group">
+                <label for="expReq">Experience Requirement:</label>
+                <input type="number" formControlName="expReq" class="form-control" id="expReq" placeholder="Experince Required" name="expReq" min="0">
+              </div>
+
+              <div class="form-group">
+                  <label for="priority">Hot Job ?:</label>
+                  <input type="checkbox" formControlName="priority"  id="priority" placeholder="Hot Job ?" name="priority" min="0" max="10">
+                </div>
+
+        <div class="form-group text-center">
+          <button type="submit" [disabled]="!postJobs.valid" class="btn btn-success mt-2 mb-2 ">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

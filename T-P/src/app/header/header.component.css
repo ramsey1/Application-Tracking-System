@@ -1,0 +1,9 @@
+.navbar{
+    background-image: url('src/assets/bg-01.jpg');    
+}
+
+.navbar:hover{
+    background-color: #553A59;
+}
+
+

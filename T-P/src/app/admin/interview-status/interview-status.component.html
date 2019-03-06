@@ -1,0 +1,110 @@
+<div [hidden]="showTable" class="status">
+
+  <div class="container" style="margin-top:30px">
+
+    <table class="table  table-hover table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>Candidate</th>
+          <th>Interviewer</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Level</th>
+          <th>Feedback</th>
+          <th>Accept</th>
+          <th>Reject</th>
+          <th>Next</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let status of assigned">
+          <td>{{status.c_name}}</td>
+          <td>{{status.i_name}}</td>
+          <td>{{status.date}}</td>
+          <td>{{status.time}}</td>
+          <td>{{status.level}}</td>
+          <td>{{status.feedback}}</td>
+          <td>
+            <div>
+              <input type="button" [disabled]="status.feedback<0" class="btn btn-success" value="Accept" name="Accept"
+                (click)="accept(status)">
+            </div>
+          </td>
+          <td>
+            <div>
+              <input type="button" [disabled]="status.feedback<0" class="btn btn-danger" value="Reject" name="Reject"
+                (click)="reject(status)">
+            </div>
+          </td>
+          <td>
+            <div>
+              <input type="button" [disabled]="status.feedback<0" class="btn btn-primary" value="Next" name="Next"
+                (click)="assignNext(status)">
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+<div [hidden]="!next" class="status">
+  <div class="container border border-secondary rounded w-100 h-100">
+    <div class="row mx-auto">
+      <div class="col-12">
+        <h1>Assign Interviewer</h1>
+        <br>
+        <h3></h3>
+        <form [formGroup]="assignInterviewer" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="candidate">Candidate:</label>
+
+            <input type="text" class="form-control" formControlName="candidateEmail" [value]=nextAssign.c_email>
+          </div>
+
+          <div class="form-group">
+            <label for="interviewer">Select Interviewer:</label>
+            <select class="form-control" formControlName="interviewerEmail">
+              <option [value]="interviewer.email" *ngFor="let interviewer of interviewers">
+                {{interviewer.name}}-----------{{interviewer.email}}
+              </option>
+            </select>
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="role">Schedule:</label>
+            <div class="clearfix">
+              <div class="form-group col-6 float-left">
+                <label>Select Date</label>
+                <input class="form-control calendar" type="date" formControlName="date">
+              </div>
+              <!-- <div class=" form-group col-6 float-right">
+                    <label>Select Time </label>
+                    <input class="form-control clock" type="time" formControlName="time">
+                  </div> -->
+              <div class="form-group col-6 float-right">
+                <label for="role">Slot:</label>
+                <select name="" id="" class="form-control" formControlName="time">
+                  <option *ngFor="let slot of interviewSlots" [value]="slot">{{slot}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <button type="submit" [disabled]="!assignInterviewer.valid"
+              class="btn btn-success mt-2 mb-2 ">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- *ngIf="status.feedback>5 || status.feedback<5&&status.feedback>0" -->

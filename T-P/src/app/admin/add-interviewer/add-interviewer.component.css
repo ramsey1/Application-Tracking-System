@@ -1,0 +1,12 @@
+.container{
+    box-shadow: 10px 5px 5px #696969;
+}
+
+.add-interviewer{
+    margin-left: 260px;
+    margin-top: 20px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px; 
+}

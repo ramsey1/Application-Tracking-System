@@ -1,0 +1,20 @@
+.assign{
+    /* margin-left: 235px;
+    max-width: 250px;
+    text-align: left; */
+    margin-left: 260px;
+    margin-top: 10px;
+    padding-bottom: 50px;
+    padding-right: 60px;
+}
+li{
+    cursor: pointer;
+}
+
+.card :hover{
+    background-color: #696969;
+}
+
+.list{
+    width: 240px;
+}

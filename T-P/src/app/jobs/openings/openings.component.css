@@ -1,0 +1,27 @@
+li{
+    cursor: pointer;
+}
+
+li:hover{
+    color: white;
+    /* background-color: #696969; */
+    background-color:#AC67B6;
+}
+
+.btn{
+    background-color: #553A59;
+}
+
+.btn:hover{
+    background-image: url('src/assets/bg-01.jpg');
+}
+
+
+body{
+margin-top:100px;     
+}
+
+img{
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}

@@ -1,0 +1,31 @@
+
+.loginForm{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    background: #f3f3f3;
+    box-shadow: 1px 1px 4px #dcdcdc;
+  }
+
+
+.container h1{
+    text-align: center;
+}
+
+input{
+    align-self: auto;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    
+}
+
+label{
+    display: block;
+}
+
+.btn{
+    /* background-color: #553A59; */
+    background-image: url('src/assets/bg-01.jpg');
+}

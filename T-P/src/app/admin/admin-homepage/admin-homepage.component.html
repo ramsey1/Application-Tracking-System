@@ -1,0 +1,40 @@
+<div id="mySidenav" class="sidenav mt-5" style="margin-top:80px">
+  <a  class="closebtn" (click)="closeNav()">&times;</a>
+  <a [routerLink]="['/admin-homepage']" (click)="toggle()">Home</a>
+  <a [routerLink]="['/admin-homepage/post-jobs']" (click)="toggle()">Post Jobs</a>
+  <a [routerLink]="['/admin-homepage/add-interviewer']" (click)="toggle()">Add Interviewer</a>
+  <a [routerLink]="['/admin-homepage/assign-interviewer']" (click)="toggle()">Assign Interviewer</a>
+  <a [routerLink]="['/admin-homepage/interview-status']" (click)="toggle()">Interview Status</a>
+  <a [routerLink]="['/admin-homepage/update-jobs']" (click)="toggle()">Update Jobs</a>
+  <a [routerLink]="['/admin-homepage/candidate-details']" (click)="toggle()">Candidate Details</a>
+  <a [routerLink]="['/admin-homepage/interviewer-details']" (click)="toggle()">Interviewer Details</a>
+  <a [routerLink]="['/admin-homepage/job-details']" (click)="toggle()">Job Details</a>
+  <a [routerLink]="['/admin-homepage/complete-applicants']" (click)="toggle()">Complete Status</a>
+
+</div>
+<div class="mt-2">
+
+  <div [hidden]="textShow">
+  <h2>Welcome. Click open for more options</h2>
+</div>
+  <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span>
+  <!-- <div class="center" [hidden]="progress">
+      <circle-progress
+      [percent]="40"
+      [radius]="100"
+      [outerStrokeWidth]="16"
+      [innerStrokeWidth]="8"
+      [outerStrokeColor]="'#78C000'"
+      [innerStrokeColor]="'#C7E596'"
+      [animation]="true"
+      [animationDuration]="300"
+    ></circle-progress>
+  </div> -->
+  <router-outlet></router-outlet>
+</div>
+
+
+<!-- <div class="row">
+      <div class="col-md-4 col-md-30">...</div>
+      <div class="col-md-8 col-md-70">...</div>
+    </div> -->

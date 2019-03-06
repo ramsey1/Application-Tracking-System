@@ -1,0 +1,111 @@
+<div class="container" style="margin-top:80px">
+
+  <table class="table  table-hover table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Candidate Name</th>
+        <th>Scheduled Time</th>
+        <th>FeedBack</th>
+        <th>Resume</th>
+        <th>Intro video</th>
+        <th>Give Comments</th>
+        <th>Submit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mapped of resList">
+        <td>{{mapped.c_name}}</td>
+        <td>{{mapped.date}} {{mapped.time}}</td>
+        <td><input type="number" [disabled]="mapped.isSubmitted" [(ngModel)]="mapped.feedback" class="marks" min="1" max="10" required>/10</td>
+        <td><button class="btn btn-info" [disabled]="mapped.isSubmitted" (click)="resume(mapped)">Resume</button></td>
+        <td><button class="btn btn-info"[disabled]="mapped.isSubmitted" (click)="intro(mapped)">Video</button></td>
+        <td><input type="text" [disabled]="mapped.isSubmitted" [(ngModel)]="mapped.comments" required></td>
+        <td><button class="btn btn-primary" [disabled]="mapped.isSubmitted"  (click)="feedback(mapped)">submit</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div  class="mt-4">
+    <div class="container table-responsive">
+      <h2 class="middle">Hi {{interviewerName}}!</h2>
+      <table class="table table-bordered table-responsive-lg table-active table-hover table-info">
+  
+        <th>Candidate Name</th>
+        <th>Scheduled Time</th>
+        <th>FeedBack</th>
+        <th>Resume</th>
+        <th>Intro video</th>
+        <th>Submit</th>
+        <tr *ngFor="let mapped of resList">
+          <td>{{mapped.c_name}}</td>
+          <td>{{mapped.date}} {{mapped.time}}</td>
+          <td><input type="number" [(ngModel)]="mapped.feedback" class="marks" min="1" max="10" required>/10</td>
+          <td><button class="btn btn-info" >Resume</button></td>
+          <td><button class="btn btn-info" >Video</button></td>
+          <td><button class="btn btn-primary" (click)="feedback(mapped)">submit</button></td>
+        </tr>
+      </table>
+      <div *ngIf='resPath!=null'>
+        <h3>Resume</h3>
+        <iframe [src]="resPath | safe" frameborder="0" width="75%" height="900px"></iframe>
+      </div>
+  
+      <div class="video center" *ngIf='vidPath!=null'>
+        <h3>Intro video</h3>
+        <video controls (click)="toggleVideo()" id="videoPlayer" width="75%" height="75%">
+          <source src="{{vidPath}}" type="video/mp4" />
+          Browser not supported
+        </video>
+  
+      </div>
+  
+    </div>
+  </div> -->

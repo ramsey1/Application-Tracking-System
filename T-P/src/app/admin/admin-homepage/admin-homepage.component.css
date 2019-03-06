@@ -1,0 +1,61 @@
+h6{
+    color:#696969;
+    /* font-size: 3.0vh; */
+    font-size: 2vmin;
+}
+
+#link{
+    color:black;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    /* background-color:#9B6CA1; */
+    background-image: url('src/assets/bg-01.jpg');
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #111;
+    background-color:  rgba(255, 255, 255, 0.7);;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  
+  @media (min-width: 768px) {
+    .col-sm-30 { width: 30%; }
+    .col-sm-70 { width: 70%; }
+  }
+  
+  .center{
+    margin-left: 600px;
+  }

@@ -1,0 +1,15 @@
+.container h1{
+    text-align: center;
+}
+.description{
+    height: 200px;
+}
+
+.post-jobs{
+    margin-left: 260px;
+    margin-top: 20px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px; 
+}

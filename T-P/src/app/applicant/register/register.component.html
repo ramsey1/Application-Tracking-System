@@ -1,0 +1,291 @@
+<div class="row mx-auto mt-5">
+  <div class="col-12">
+    <h1>Registration Form</h1>
+  </div>
+</div>
+
+<div class="container border border-secondary rounded mt-4">
+  <div class="row mx-auto ">
+    <div class="col-12">
+      <form [formGroup]="profileForm">
+
+          <div class="container border-primary col-12">
+            <h3>Personal Information</h3>
+            <br>
+
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" formControlName="fullName" class="form-control" id="name" placeholder="Enter name"
+                name="name">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" formControlName="address" class="form-control" id="address" placeholder="Enter Address"
+                  name="address">
+              </div>
+
+            <div class="form-group">
+              <label for="city">City:</label>
+              <input type="text" formControlName="city" class="form-control" id="city" placeholder="Enter City"
+                name="city">
+            </div>
+
+            <div class="clearfix">
+
+            <div class="form-group col-6 float-left">
+              <label for="state">State:</label>
+              <input type="text" formControlName="state" class="form-control" id="state" placeholder="Enter state"
+                name="state">
+            </div>
+
+            <div class="form-group col-6 float-right">
+              <label for="zip">Zip:</label>
+              <input type="text" formControlName="zip" class="form-control" id="zip" placeholder="Enter zip" name="zip">
+            </div>
+
+          </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email"
+                name="email">
+                <div class="alert alert-danger" *ngIf="!profileForm.controls['email'].valid && profileForm.controls['email'].touched">Email should be in proper format</div>
+            </div>
+
+            <div class="form-group">
+              <label for="mobile">Contact No:</label>
+              <input type="text" formControlName="mobile" class="form-control" id="mob"
+                placeholder="Enter mobile number" name="mob">
+              <br>
+            </div>
+
+          </div>
+
+
+          <div class="container border-primary col-12">
+            <h3>Education and Experience</h3>
+            <br>
+
+            <div class="clearfix">
+            <div class="form-group col-7 float-left">
+              <label for="highSchool">High School:</label>
+              <input type="text" formControlName="highSchool" class="form-control" id="x" placeholder="Enter high school name"
+                name="x">
+            </div>
+
+            <div class="form-group col-5 float-right">
+              <label for="cgpa">High School CGPA:</label>
+              <input type="text" formControlName="cgpa" class="form-control" id="cgpa" placeholder="Enter CGPA"
+                name="cgpa">
+            </div>
+          </div>
+
+          <div class="clearfix">
+            <div class="form-group col-7 float-left">
+              <label for="xii">Intermediate School:</label>
+              <input type="text" formControlName="xii" class="form-control" id="xii"
+                placeholder="Enter intermediate school name" name="xii">
+            </div>
+
+            <div class="form-group col-5 float-right">
+              <label for="perc">Intermediate School %:</label>
+              <input type="text" formControlName="perc" class="form-control" id="perc" placeholder="Enter %"
+                name="perc">
+            </div>
+          </div>
+
+
+          <div class="clearfix">
+            <div class="form-group col-7 float-left">
+              <label for="hgd">Highest Graduation:</label>
+              <select name="" id="" class="form-control" formControlName="hgd">
+              <option *ngFor="let hgd of highestGraduation" [value]="hgd">{{hgd}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-5 float-right">
+              <label>Graduation Year</label>
+              <input class="form-control calendar" type="number" formControlName="gdate" min="2014" max="2022" step="1" value="2019">
+            </div>
+          </div>
+
+            <div class="form-group">
+              <label for="certifications">Certifications:</label>
+              <input type="text" formControlName="certifications" class="form-control" id="certifications"
+                placeholder="Enter certifications" name="certifications">
+            </div>
+
+            <div class="form-group">
+              <label for="skills">Skills:</label>
+              <input type="text" formControlName="skills" class="form-control" id="skills" placeholder="Enter skills"
+                name="skills">
+            </div>
+
+            <div class="form-group">
+              <div formGroupName="experience">
+                <label for="experience">Experience:</label>
+                <div class="clearfix">
+
+                  <div class="col-6 float-left">
+                    <label for="year">Year :</label>
+                    <input type="number" formControlName="year" class="form-control" name="expY" id="expY" min='0'>
+                  </div>
+
+                  <div class="col-6 float-right">
+                    <label for="month">Month :</label>
+                    <input type="number" formControlName="month" class="form-control" name="expM" id="expM" min='0'>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          
+
+          </div>
+
+      
+          <div class="container border-primary  col-12">
+            <h3>Employment History</h3>
+            <br>
+
+            <div class="form-group">
+              <label for="employer">Employer:</label>
+              <input type="text" formControlName="employer" class="form-control" id="employer"
+                placeholder="Enter employer" name="employer">
+            </div>
+
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <input type="text" formControlName="empadd" class="form-control" id="empadd" placeholder="Enter address"
+                name="empadd">
+            </div>
+
+            <div class="clearfix">
+            <div class="form-group col-6 float-left">
+              <label for="Eemail">Email:</label>
+              <input type="email" formControlName="Eemail" class="form-control" id="Eemail"
+                placeholder="Enter employer email" name="Eemail">
+            </div>
+
+
+            <div class="form-group col-6 float-right">
+              <label for="Ephone">Employer Phone:</label>
+              <input type="Ephone" formControlName="Ephone" class="form-control" id="Ephone"
+                placeholder="Enter employer mobile" name="Ephone">
+            </div>
+          </div>
+
+          <div class="clearfix ">
+            <div class="form-group col-6 float-left">
+              <label for="supervisor">Supervisor:</label>
+              <input type="text" formControlName="supervisor" class="form-control" id="supervisor"
+                placeholder="Enter supervisor name" name="supervisor">
+            </div>
+
+            <div class="form-group col-6 float-right">
+              <label for="jtitle">Job Title:</label>
+              <input type="text" formControlName="jtitle" class="form-control" id="jtitle" placeholder="Enter Job Title"
+                name="jtitle">
+            </div>
+          </div>
+
+          <div class="clearfix">
+            <div class="form-group col-6 float-left">
+              <label for="salary">Salary:</label>
+              <input type="text" formControlName="salary" class="form-control" id="salary" placeholder="Enter salary"
+                name="salary">
+            </div>
+
+            <div class="form-group col-6 float-right">
+              <label>Ending Date</label>
+              <input class="form-control calendar" type="date" formControlName="ehdate">
+            </div>
+          </div>
+
+            <div class="form-group">
+              <label for="rfl">Reson For Leaving:</label>
+              <input type="text" formControlName="rfl" class="form-control" id="rfl" placeholder="Reson For Leaving"
+                name="rfl">
+            </div>
+
+           
+
+          </div>
+       
+          
+          <div class="container border-primary  col-12">
+            <h3>References</h3>
+            <br>
+
+            <div class="form-group">
+              <label for="refname">Name:</label>
+              <input type="text" formControlName="refname" class="form-control" id="refname" placeholder="Enter name"
+                name="refname">
+            </div>
+
+            <div class="form-group">
+              <label for="refjob">Job Title:</label>
+              <input type="text" formControlName="refjob" class="form-control" id="refjob" placeholder="Enter Job"
+                name="refjob">
+            </div>
+
+
+            <div class="form-group">
+              <label for="refcomp">Company:</label>
+              <input type="text" formControlName="refcomp" class="form-control" id="refcomp"
+                placeholder="Enter company name" name="refcomp">
+            </div>
+
+
+            <div class="form-group">
+              <label for="refphone">Phone:</label>
+              <input type="text" formControlName="refphone" class="form-control" id="refphone"
+                placeholder="Enter mobile" name="refphone">
+            </div>
+
+
+            <div class="form-group">
+              <label for="refemail">Email:</label>
+              <input type="email" formControlName="refemail" class="form-control" id="refemail"
+                placeholder="Enter email" name="refemail">
+            </div>
+
+         
+          </div>
+       
+          <div class="container border-primary col-12">
+            <h3>Attachments</h3>
+            <br>
+            
+
+              <div class="form-group col-6 float-left">
+                <label for="resume">Resume</label>
+                <input type="file"  class="form-control" (change)="resumeFileInput($event)">
+              </div>
+
+              <div class="form-group col-6 float-right">
+                <label for="video">Introductory Video</label>
+                <input type="file"  class="form-control" (change)="videoFileInput($event)">
+              </div>
+           
+
+            <div class="form-group col-6">
+              <label for="video">Applying For</label>
+              <input type="text" formControlName="jobCode" class="form-control" value="{{job_code}}">
+            </div>
+
+
+          </div>
+          <div class="form-group text-center">
+            <br>
+            <button type="submit" [disabled]="!profileForm.valid" class="btn btn-success mt-2 mb-2 "
+              (click)="onReg()">Register</button>
+          </div>
+        
+
+      </form>
+    </div>
+  </div>
+</div>

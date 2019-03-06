@@ -1,0 +1,23 @@
+<div class="job-details">
+  <div class="container" style="margin-top:30px">
+
+    <table class="table  table-hover table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>Job Profile</th>
+          <th>Job Code</th>
+          <th>Applied</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs">
+          <td>{{job.job_profile}}</td>
+          <td>{{job.job_code}}</td>
+          <td>{{job.aplied_cnt}}</td>
+          <td><button class="btn btn-danger" (click)="remove(job)">Remove</button></td>
+        </tr>
+      </tbody>      
+    </table>
+  </div>
+</div>

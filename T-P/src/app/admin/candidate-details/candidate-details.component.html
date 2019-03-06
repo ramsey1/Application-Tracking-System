@@ -1,0 +1,37 @@
+<div class="candidate-details">
+<div class="container" style="margin-top:30px">
+
+  <table class="table  table-hover table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Candidate Name</th>
+        <th>Candidate Email</th>
+        <th>Resume</th>
+        <th>Intro video</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let candidate of applicants">
+        <td>{{candidate.fullName}}</td>
+        <td>{{candidate.email}}</td>
+        <td><button class="btn btn-info" (click)="resume(candidate)">Resume</button></td>
+        <td><button class="btn btn-info" (click)="intro(candidate)">Video</button></td>
+        
+      </tr>
+    </tbody>
+    
+    <!-- <div [hidden]="!displayVideo" *ngIf="vid">
+      <video controls id="videoPlayer" width="75%" height="75%">
+        <source [src]="vid" type="video/mp4" />
+        Browser not supported
+      </video>
+    </div> -->
+    
+    
+
+    <!-- <div [hidden]="!displayResume">
+      <iframe [src]="resum| safe" frameborder="0"></iframe>
+    </div> -->
+  </table>
+</div>
+</div>

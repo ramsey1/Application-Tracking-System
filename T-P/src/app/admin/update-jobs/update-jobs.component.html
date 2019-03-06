@@ -1,0 +1,71 @@
+<div class="update">
+<div class="container" style="margin-top:30px">
+
+  <div [hidden]="displayTable">
+
+    <table class="table  table-hover table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>Job Profile</th>
+          <th>Job Code</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let job of jobs">
+          <td>{{job.job_profile}}</td>
+          <td>{{job.job_code}}</td>
+          <td><div>
+            <button type="button" class= "btn btn-primary" (click)="updateJob(job)">Update</button>
+          </div></td>
+        </tr>
+      </tbody>      
+    </table>
+  </div>
+
+
+<div [hidden]="!displayForm">
+      <div class="container border border-secondary rounded  h-100 w-100">
+          <div class="row mx-auto mr-5">
+            <div class="col-12">
+              <h1>Update  Job</h1>
+              <br>
+              <form [formGroup]="updateJobs" (ngSubmit)="onSubmit()">
+        
+                  <div class="form-group">
+                      <label for="jobCode">Job Code:</label>
+                      <input type="text" formControlName="jobCode" class="form-control" id="jobCode" placeholder="Enter Job Code" name="jobCode">
+                    </div>
+        
+        
+                    <div class="form-group">
+                      <label for="vacancies">Vacancies:</label>
+                      <input type="number" formControlName="vacancies" class="form-control" id="vacancies" placeholder="Enter Job vacancies" name="vacancies" min="1">
+                    </div>
+        
+                    <div class="form-group">
+                      <label for="baseSal">Base Salary:</label>
+                      <input type="text" formControlName="baseSal" class="form-control" id="baseSal" placeholder="Enter Base Salary" name="baseSal">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isActive">Location:</label>
+                        <input type="text" formControlName="location" class="form-control" id="location" placeholder="Enter Location" name="location">
+                      </div>
+
+                      <div class="form-group">
+                          <label for="priority">Hot job ?:</label>
+                          <input type="checkbox" formControlName="priority"  id="priority" placeholder="Hot Job ?" name="priority" min="0" max="10">
+                        </div>
+                     
+                <div class="form-group text-center">
+                  <button type="submit" [disabled]="!updateJobs.valid" class="btn btn-success mt-2 mb-2 ">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+</div>

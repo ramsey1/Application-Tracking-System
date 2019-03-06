@@ -1,0 +1,21 @@
+li{
+    cursor: pointer;
+}
+
+li:hover{
+    color: white;
+    background-color: #696969;
+}
+
+.assign{
+    margin-left: 235px;
+}
+
+.update{
+    margin-left: 260px;
+    margin-top: 10px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px; 
+}
