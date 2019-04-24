@@ -5,8 +5,24 @@
     margin-left: 260px;
     margin-top: 10px;
     padding-bottom: 50px;
-    padding-right: 60px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 40px; 
 }
+
+form{
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    padding-top:20px;
+    padding-bottom: 20px; 
+    width: 600px;
+  }
+
+  h1{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight:600;
+  }
+
 li{
     cursor: pointer;
 }
@@ -17,4 +33,9 @@ li{
 
 .list{
     width: 240px;
+    /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); */
+}
+
+select:hover, input:hover{
+    cursor: pointer;
 }

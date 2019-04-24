@@ -33,6 +33,12 @@ export class AssignInterviewerComponent implements OnInit {
   jobs:any;
   adminInfo:any;
 
+  config = {displayKey: "", //if objects array passed which AGENCY_CODEkey to be displayed defaults to description
+  search: true, //true/false for the search functionlity defaults to false,
+  height: "250px", //height of the list so that if there are more no of items it can show a scroll defaults to auto. With auto height scroll will never appear
+  placeholder: "Select" // text to be displayed when no item is selected defaults to Select.
+};
+
   mockData={"name":"","email":""};
 
   tb:{
@@ -45,6 +51,10 @@ export class AssignInterviewerComponent implements OnInit {
 
   name =[];
 
+  jobCodes=[];
+
+  mockJobs = ["JRC123", "MEAN123"];
+
   date = "2019-03-01";
   time = "11:00-12:00 PM";
   mocEm = "vineet@gmail.com";
@@ -53,9 +63,23 @@ export class AssignInterviewerComponent implements OnInit {
   assignInterviewer:FormGroup;
 
   ngOnInit() {
+    
     this.getTBA();
+    this.getCodes();
     this.getInterviewer();
     this.getApplicant();
+    }
+
+    getCodes(){
+      this.globalService.getServerTBACodes().subscribe(res=>{
+        console.log(res);
+        
+        for(var i=0;i<res.length;i++){
+          this.jobCodes[i] = res[i].j_code;
+        }
+        console.log(this.jobCodes);
+        
+      })
     }
 
   getApplicant(){
@@ -83,9 +107,19 @@ export class AssignInterviewerComponent implements OnInit {
     this.globalService.getServerTBA().subscribe(res=>{
       this.tba = res;
       console.log(this.tba);
+
+      // for(var i=0;i<this.tba.length;i++){
+      //   if(this.tba[i].is_assigned){
+      //     this.tba.splice(i,1);
+      //   }
+      // }
+
+      console.log(this.tba);
+      
       
       this.uniqueTBA();
       console.log(this.TBA);
+      
       
     })
   }
@@ -115,6 +149,7 @@ export class AssignInterviewerComponent implements OnInit {
     this.TBA=this.tba.reduce((acc, x) =>
    acc.concat(acc.find(y => y.j_code === x.j_code) ? [] : [x])
  , []);
+
  console.log('redu');
   }
 
@@ -166,8 +201,14 @@ export class AssignInterviewerComponent implements OnInit {
     });
 
     
+    alert('assigned successfully');
     this.assignInterviewer.reset();
-    this.router.navigate(['admin-homepage/interview-status']);
+    // this.router.navigate(['admin-homepage/interview-status']);
+    
+  }
+
+  selectionChanged(event){
+    console.log(event);
     
   }
 

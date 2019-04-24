@@ -17,6 +17,7 @@ import { AuthService } from './auth/auth.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { SelectDropDownModule } from 'ngx-select-dropdown'
  
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       outerStrokeColor: "#78C000",
       innerStrokeColor: "#C7E596",
       animationDuration: 300,
-    })
+    }),
+    SelectDropDownModule
   ],
   providers: [CookieService,AuthGuardService,AuthService],
   bootstrap: [AppComponent]

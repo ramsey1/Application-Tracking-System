@@ -3,8 +3,10 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { roles } from '../role-lists';
 import { DataService } from 'src/app/data.service';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
+import { JwtHelperService } from '@auth0/angular-jwt';
+ 
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-add-interviewer',
@@ -13,10 +15,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddInterviewerComponent implements OnInit {
 
-  constructor(private globalService : DataService,private router:Router,private cookieService:CookieService,private toastr: ToastrService) { 
-    if(this.cookieService.check('email')){
-      this.adminInfo=this.cookieService.get('email');
-    } 
+  constructor(private globalService : DataService,private router:Router,private toastr: ToastrService) { 
+     this.token = localStorage.getItem('token');
+     let dec = helper.decodeToken(this.token);
+     this.adminInfo = dec.email;
     this.initializeform();
   }
 
@@ -28,9 +30,14 @@ export class AddInterviewerComponent implements OnInit {
 
   adminInfo:any;
 
+  token:any;
+
   initializeform() {
     this.addInterviewer = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z\\s]*$')
+      ])),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       role: new FormControl('', [Validators.required]),
@@ -57,21 +64,27 @@ export class AddInterviewerComponent implements OnInit {
       console.log(res);
     })
 
-    // this.addInterviewer.value.role = 'interviewer';
-    this.addInterviewer.get('role').setValue('interviewer');
-
-    console.log('register',this.addInterviewer.value);
+    let formData = this.initializeFormData();
   
-    this.globalService.setServerRegister(this.addInterviewer.value).subscribe(res=>{
-        console.log(res);
+    this.globalService.setServerRegister(formData).subscribe(res=>{
+       console.log('reg');
       });
 
+      alert('Added Successfully');
+
     this.addInterviewer.reset();
-    this.router.navigate(['admin-homepage/interviewer-details']);
+    // this.router.navigate(['admin-homepage/interviewer-details']);
   }
 
-  success(){
-    this.toastr.success('Hello world!', 'Toastr fun!');
+  initializeFormData(){
+    let formData = new FormData();
+    formData.append('username',this.addInterviewer.get('name').value);
+    formData.append('email',this.addInterviewer.get('email').value);
+    formData.append('password',this.addInterviewer.get('password').value);
+    formData.append('role','interviewer');
+
+    return formData;
   }
 
+ 
 }

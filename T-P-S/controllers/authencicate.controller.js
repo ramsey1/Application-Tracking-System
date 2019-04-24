@@ -1,5 +1,8 @@
 var passport = require('passport');
 var User = require('../models/user.model');
+
+var Session = require('../models/session.model');
+
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
   res.json(content);
@@ -16,6 +19,7 @@ module.exports.register = function(req, res) {
 
   var user = new User();
 
+  user.username = req.body.username;
   user.role = req.body.role;
   user.email = req.body.email;
 
@@ -57,6 +61,11 @@ module.exports.login = function(req, res) {
       res.json({
         "token" : token,
         role:user.role
+      });
+
+      let session = new Session({
+        u_email:req.body.email,
+        token:token
       });
     } else {
       // If user is not found

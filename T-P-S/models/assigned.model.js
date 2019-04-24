@@ -18,7 +18,8 @@ let assignSchema = new Schema({
     status: { type: String },
     comments:{type:String},
     isSubmitted: {type : Boolean,default:false},
-    isCompleted:{type: Boolean,default:false}
+    isCompleted:{type: Boolean,default:false},
+    isNext:{type:Boolean,default:false}
 })
 
 

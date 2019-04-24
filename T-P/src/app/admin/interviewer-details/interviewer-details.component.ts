@@ -10,7 +10,9 @@ export class InterviewerDetailsComponent implements OnInit {
 
   interviewers=new Array;
 
-  constructor(private globalService:DataService) { }
+  constructor(private globalService:DataService) {
+   
+   }
 
   ngOnInit() {
     this.getInterviewers();
@@ -28,6 +30,10 @@ export class InterviewerDetailsComponent implements OnInit {
       console.log(res);
       
     })
+    
+  }
+  check(){
+    console.log('Interviewer Working');
     
   }
 

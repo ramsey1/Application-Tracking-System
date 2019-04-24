@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
   forLogin : boolean;
 
-  constructor(private globalService:DataService,private router:Router) {
+  constructor(private globalService:DataService,private router:Router,private cookieService:CookieService) {
     if(localStorage.getItem('token')){
       if(!this.forLogin)
         this.forLogin = !this.forLogin;
@@ -53,12 +54,14 @@ export class HeaderComponent implements OnInit {
     // this.forLogin = !this.forLogin;
     this.globalService.setLogin(this.forLogin);
     console.log(this.globalService.getLogin());
-    
   }
+
 
   toggle(){
     this.isLogin = !this.isLogin;
     this.forLogin=!this.forLogin;
+    console.log(this.cookieService.get('email'));
+    
     localStorage.removeItem('token');
     this.router.navigate(['login']);
   }

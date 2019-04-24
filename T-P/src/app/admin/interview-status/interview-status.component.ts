@@ -3,6 +3,7 @@ import { DataService } from 'src/app/data.service';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { slots } from '../slots';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-interview-status',
@@ -12,6 +13,7 @@ import { slots } from '../slots';
 export class InterviewStatusComponent implements OnInit {
 
   constructor(private globalService: DataService,private router:Router) {
+   
     this.initializeForm();
    }
 
@@ -28,9 +30,11 @@ export class InterviewStatusComponent implements OnInit {
 
   nextAssign=[];
 
+  nextInt =new Array;
+
   assignInterviewer:FormGroup;
 
-  async ngOnInit() {
+  ngOnInit() {
     this.getAssigned();
     this.getInterviewer();
     console.log(this.assigned);
@@ -56,7 +60,24 @@ export class InterviewStatusComponent implements OnInit {
         }
       }
       console.log(this.selectReject);
-      this.assigned = this.selectReject;
+
+      this.assigned = [];
+
+      this.selectReject.forEach((element)=>{
+        if(!(element.isNext&&element.isSubmitted)){
+          this.assigned.push(element);
+        }
+      });
+      console.log('StatusTable:::::::::',this.assigned);
+      
+
+      // this.assigned = this.selectReject;
+
+      // for(var i=0;i<this.assigned.length;i++){
+      //   console.log(this.assigned[i].isNext);
+      //   console.log(this.assigned[i]<0);
+      //   this.assigned[i].isNext = this.assigned[i].isNext || this.assigned[i].feedback<0
+      // }
       
   }
 
@@ -86,9 +107,9 @@ export class InterviewStatusComponent implements OnInit {
       i_name:new FormControl(''),
       candidateEmail:new FormControl(''),
       candidateName:new FormControl(''),
-      interviewerEmail:new FormControl(''),
-      date:new FormControl(''),
-      time:new FormControl(''),
+      interviewerEmail:new FormControl('',Validators.required),
+      date:new FormControl('',Validators.required),
+      time:new FormControl('',Validators.required),
       feedback:new FormControl(''),
       status:new FormControl(''),
       i_id:new FormControl(''),
@@ -105,6 +126,9 @@ export class InterviewStatusComponent implements OnInit {
     console.log(status);
     this.nextAssign = status;
     this.interviewers = this.setInterviewers(this.interviewers,'email',status.i_email);
+    for(var i=0;i<this.interviewers.length;i++){
+      this.nextInt.push(this.interviewers[i]);
+    }
     this.next =!this.next;
     this.showTable =!this.showTable;
   }
@@ -115,13 +139,10 @@ export class InterviewStatusComponent implements OnInit {
        if( arr[i] 
            && arr[i].hasOwnProperty(attr) 
            && (arguments.length > 2 && arr[i][attr] === value ) ){ 
-
            arr.splice(i,1);
-
        }
     }
     return arr;
-
   }
 
   accept(status){
@@ -178,6 +199,7 @@ export class InterviewStatusComponent implements OnInit {
     this.assignInterviewer.get('j_code').setValue(this.nextAssign['j_code']);
     this.assignInterviewer.get('j_id').setValue(this.nextAssign['j_id']);
     this.assignInterviewer.get('status').setValue("Next");
+    this.assignInterviewer.get('_id').setValue(this.nextAssign['_id']);
   
 
     let lc = parseInt(this.nextAssign['level'].match(/\d+/),10);
@@ -201,10 +223,20 @@ export class InterviewStatusComponent implements OnInit {
 
   getSpecificInterviewer(){
     for(var i=0;i<this.interviewers.length;i++){
+      
       if(this.assignInterviewer.value.interviewerEmail == this.interviewers[i].email){
+        console.log(this.interviewers[i]);
+        
         return this.interviewers[i];
+
       }
     }
+
+  }
+
+  check(){
+    console.log('Assign Works');
+    
   }
 
 }

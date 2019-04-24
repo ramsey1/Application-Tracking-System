@@ -3,7 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/data.service';
 import { highestGraduation } from '../../applicant/highestGraduation';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { EventEmitterServices } from 'src/app/service/evnet-emitter.service';
+ 
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-post-jobs',
@@ -12,10 +15,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class PostJobsComponent implements OnInit {
 
-  constructor(private globalService :DataService,private router:Router,private cookieService:CookieService) {
-    if(this.cookieService.check('email')){
-      this.adminInfo=this.cookieService.get('email');
-    } 
+  constructor(private globalService :DataService,private router:Router,private emittService:EventEmitterServices) {
+    this.token = localStorage.getItem('token');
+    let dec= helper.decodeToken(this.token);
+    this.adminInfo = dec.email;
     this.initializeForm();
    }
 
@@ -26,6 +29,8 @@ export class PostJobsComponent implements OnInit {
   highestGraduation = highestGraduation;
 
   adminInfo:any;
+
+  token:any;
 
   enroll = ['Full Time','Part Time','Internship'];
 
@@ -58,6 +63,7 @@ export class PostJobsComponent implements OnInit {
   }
 
   onSubmit(){
+
     if(this.postJobs.get('priority').value==""){
       this.postJobs.get('priority').setValue(false);
     }
@@ -67,7 +73,13 @@ export class PostJobsComponent implements OnInit {
     console.log(this.postJobs.value);
     this.globalService.setServerJobs(this.postJobs.value).subscribe(res=>{
       console.log(res);
+      this.emittService.onFirstComponentButtonClick();
     });
+   
+    // this.globalService.onJobPost();
+
+    
+
 
     this.postJobs.reset();
     alert('Posted SucessFully');

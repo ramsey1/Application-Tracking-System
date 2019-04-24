@@ -16,6 +16,10 @@ export class PortalLoginComponent implements OnInit {
   loggedin=false;
   credentials:any;
 
+  displayLogin :boolean;
+
+  switch:boolean;
+
   email: string = "";
   password: string = "";
 
@@ -31,22 +35,30 @@ export class PortalLoginComponent implements OnInit {
     this.loginPortal();
    }
 
-  async ngOnInit() {
+ ngOnInit() {
     this.cookieService.deleteAll(); 
+    console.log(this.display);
+    
+    // this.display();
   }
 
-   async onSubmit(data){
+ onSubmit(data){
     this.email = data.email;
     this.password = data.password;
        
     this.cookieService.set('email',this.email);
 
   
-    this.globalService.login(data).subscribe(res=>{
-      console.log(res);
+    this.globalService.login(data).subscribe((res)=>{
+      console.log(res.error);
+      this.switch =!this.switch;
+      if(res.message=='User not found'){
+        alert('Usernot exist');
+        return;
+      }
       localStorage.setItem('token',res.token);
       if(res.role=='admin'){
-        this.router.navigate(['admin-homepage'],{state:{email:this.email}});
+        this.router.navigate(['admin-homepage/post-jobs'],{state:{email:this.email}});
       }
       else if(res.role=='interviewer'){
         this.router.navigate(['interviewer-homepage'],{state:{email:this.email}});
@@ -54,13 +66,19 @@ export class PortalLoginComponent implements OnInit {
       else if(res.role=='applicant'){
         this.router.navigate(['applicant-status'],{state:{email:this.email}});
       }
+      this.globalService.onFirstComponentButtonClick();
+
     })
 
-    this.globalService.onFirstComponentButtonClick();
-
+   
+    
     this.loggedin=true;
     console.log(this.loggedin);
     this.loginForm.reset();
 
+  }
+
+  display(){
+    this.displayLogin = !this.displayLogin;
   }
 }

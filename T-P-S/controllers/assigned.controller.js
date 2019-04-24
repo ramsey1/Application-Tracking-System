@@ -20,6 +20,12 @@ async function postAssignedData(req,res){
    
     let int = await Interviewer.findOne({email:req.body.interviewerEmail},'name');
     console.log(int);
+
+    Assigned.findOneAndUpdate({_id:req.body._id},{
+        isNext : true
+    }).then((assigned)=>{
+        console.log('updated');
+    });
     
     let assigned = new Assigned({
         c_email:req.body.candidateEmail,
@@ -100,11 +106,19 @@ function getOneAssigned(req,res){
     })
 }
 
+function upd(req,res){
+    Assigned.findOneAndUpdate({_id:req.body._id},{
+        isNext : true
+    }).then((assigned)=>{
+        console.log('updated');
+    });
+}
 
 
 module.exports = {
     getAssignedData : getAssignedData,
     postAssignedData : postAssignedData,
     updateAssigned: updateAssigned,
-    getOneAssigned : getOneAssigned
+    getOneAssigned : getOneAssigned,
+    upd:upd
 }

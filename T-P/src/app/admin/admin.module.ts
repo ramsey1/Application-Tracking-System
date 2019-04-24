@@ -15,6 +15,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { SelectedCandidatesComponent } from './selected-candidates/selected-candidates.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { HttpClientModule } from '@angular/common/http';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
       innerStrokeColor: "#C7E596",
       animationDuration: 300,
     }),
-    HttpClientModule
+    HttpClientModule,
+    SelectDropDownModule
   ],
   exports:[PostJobsComponent, AddInterviewerComponent, AssignInterviewerComponent, InterviewStatusComponent, CandidateDetailsComponent,AdminHomepageComponent]
 })

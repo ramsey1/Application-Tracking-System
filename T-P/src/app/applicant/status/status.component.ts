@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-status',
@@ -26,13 +29,12 @@ export class StatusComponent implements OnInit {
   jobs=new Array;
   job=new Array;
 
+  token:any;
+
   constructor(private globalService : DataService,private router:Router,private cookieService :CookieService) { 
-    if(this.cookieService.check('email')){
-      this.email=this.cookieService.get('email');
-    }
-    else{
-    this.email = this.router.getCurrentNavigation().extras.state.email;
-   }
+  this.token = localStorage.getItem('token');
+  let dec = helper.decodeToken(this.token);
+  this.email = dec.email;
   }
 
   status = [];

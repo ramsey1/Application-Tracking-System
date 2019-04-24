@@ -20,18 +20,23 @@
       </tr>
     </tbody>
     
-    <!-- <div [hidden]="!displayVideo" *ngIf="vid">
-      <video controls id="videoPlayer" width="75%" height="75%">
-        <source [src]="vid" type="video/mp4" />
+    <div *ngIf="displayVideo">
+      <!-- <video controls id="videoPlayer" width="75%" height="75%">
+        <source [src]="vidSrc | safe" type="video/mp4" />
         Browser not supported
-      </video>
-    </div> -->
+      </video> -->
+
+
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" [src]="vidSrc | safe"></iframe>
+</div>
+    </div>
     
     
 
-    <!-- <div [hidden]="!displayResume">
-      <iframe [src]="resum| safe" frameborder="0"></iframe>
-    </div> -->
+    <div *ngIf="displayResume">
+      <iframe [src]="resSrc| safe" frameborder="0"></iframe>
+    </div>
   </table>
 </div>
 </div>

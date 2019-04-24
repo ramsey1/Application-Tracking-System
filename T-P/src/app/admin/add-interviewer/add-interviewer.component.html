@@ -1,11 +1,11 @@
 <div class="add-interviewer">
-<div class="container border border-secondary rounded  h-100 w-100">
+<div class="container h-100 w-100">
   <div class="row mx-auto mr-5">
     <div class="col-12">
       <h1>Add Interviewer</h1>
       <br>
       <form [formGroup]="addInterviewer" (ngSubmit)="onSubmit()">
-
+        <div class="container border-primary col-10" style="padding-top:20px">
           <div class="form-group">
               <label for="name">Name:</label>
               <input type="text" formControlName="name" class="form-control" id="name" placeholder="Enter Name" name="name">
@@ -36,10 +36,9 @@
         <div class="form-group text-center">
           <button type="submit" [disabled]="!addInterviewer.valid" class="btn btn-success mt-2 mb-2 ">Submit</button>
         </div>
+      </div>
       </form>
     </div>
   </div>
 </div>
-
-<button class="btn btn-primary" (click)="success()">Test</button>
 </div>

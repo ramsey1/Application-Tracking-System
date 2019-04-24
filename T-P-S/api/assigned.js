@@ -11,5 +11,7 @@ router.post('/', (req,res)=>assignedController.postAssignedData(req,res));
 
 router.put('/:email',(req,res)=> assignedController.updateAssigned(req,res));
 
+router.put('/',(req,res)=>assignedController.upd(req,res));
+
 
 module.exports = router;

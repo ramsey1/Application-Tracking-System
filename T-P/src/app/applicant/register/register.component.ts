@@ -29,7 +29,11 @@ export class RegisterComponent implements OnInit {
 
   j_id:any;
 
+  jobedit:boolean;
+
   highestGraduation = highestGraduation;
+
+  gender=['Male','Female','Other'];
 
   constructor(private globalService : DataService,private router:Router, private localService: RegisterService) { 
     this.inititializeForm();
@@ -61,17 +65,31 @@ export class RegisterComponent implements OnInit {
 
   inititializeForm(){
     this.profileForm = new FormGroup({
-      fullName:new FormControl('',Validators.required),
+      fullName:new FormControl('',Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z\\s]*$')
+      ])),
       address:new FormControl('',Validators.required),
-      city:new FormControl('',Validators.required),
-      state:new FormControl('',Validators.required),
+      city:new FormControl('',Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z\\s]*$')
+      ])),
+      state:new FormControl('',Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z\\s]*$')
+      ])),
       zip:new FormControl('',Validators.required),
-      email:new FormControl('',[Validators.required,Validators.email]),
+      gender:new FormControl('',Validators.required),
+      email:new FormControl('',Validators.compose([Validators.required,
+        Validators.email
+      ])),
       mobile:new FormControl('',[Validators.required,phoneNumberValidator]),
       highSchool:new FormControl('',Validators.required),
       cgpa:new FormControl('',Validators.required),
+      passingYearX:new FormControl('',Validators.required),
       xii:new FormControl('',Validators.required),
       perc:new FormControl('',Validators.required),
+      passingYearXii:new FormControl('',Validators.required),
       hgd:new FormControl('',Validators.required),
       gdate:new FormControl('',Validators.required),
       certifications:new FormControl(''),
@@ -82,20 +100,25 @@ export class RegisterComponent implements OnInit {
       }),
       employer:new FormControl(''),
       empadd:new FormControl(''),
-      Eemail:new FormControl('',[Validators.email]),
+      Eemail:new FormControl('',[ Validators.email]),
       Ephone:new FormControl(''),
       supervisor:new FormControl(''),
       jtitle:new FormControl(''),
       salary:new FormControl(''),
       ehdate:new FormControl(''),
       rfl:new FormControl(''),
-      refname:new FormControl('',Validators.required),
+      refname:new FormControl('',Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z\\s]*$')
+      ])),
       refjob:new FormControl('',Validators.required),
       refcomp:new FormControl('',Validators.required),
       refphone:new FormControl('',Validators.required),
-      refemail:new FormControl('',[Validators.required,Validators.email]),
-      resFile:new FormControl(''),
-      vidFile:new FormControl(''),
+      refemail:new FormControl('',Validators.compose([Validators.required,
+        Validators.email
+      ])),
+      resFile:new FormControl('',Validators.required),
+      vidFile:new FormControl('',Validators.required),
       jobCode:new FormControl(''),
       j_id:new FormControl(''),
       isVerified : new FormControl('')
@@ -147,10 +170,13 @@ export class RegisterComponent implements OnInit {
     formData.append('city', this.profileForm.get('city').value);
     formData.append('state', this.profileForm.get('state').value);
     formData.append('zip', this.profileForm.get('zip').value);
+    formData.append('gender',this.profileForm.get('gender').value);
     formData.append('email', this.profileForm.get('email').value);
     formData.append('mobile', this.profileForm.get('mobile').value);
     formData.append('highSchool', this.profileForm.get('highSchool').value);
     formData.append('cgpa', this.profileForm.get('cgpa').value);
+    formData.append('passingYearX',this.profileForm.get('passingYearX').value);
+    formData.append('passingYearXii',this.profileForm.get('passingYearXii').value);
     formData.append('xii', this.profileForm.get('xii').value);
     formData.append('perc', this.profileForm.get('perc').value);
     formData.append('hgd', this.profileForm.get('hgd').value);

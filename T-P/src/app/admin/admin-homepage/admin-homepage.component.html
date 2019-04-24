@@ -1,6 +1,6 @@
 <div id="mySidenav" class="sidenav mt-5" style="margin-top:80px">
-  <a  class="closebtn" (click)="closeNav()">&times;</a>
-  <a [routerLink]="['/admin-homepage']" (click)="toggle()">Home</a>
+  <!-- <a  class="closebtn" (click)="closeNav()">&times;</a> -->
+  <!-- <a [routerLink]="['/admin-homepage']" (click)="home()">Home</a> -->
   <a [routerLink]="['/admin-homepage/post-jobs']" (click)="toggle()">Post Jobs</a>
   <a [routerLink]="['/admin-homepage/add-interviewer']" (click)="toggle()">Add Interviewer</a>
   <a [routerLink]="['/admin-homepage/assign-interviewer']" (click)="toggle()">Assign Interviewer</a>
@@ -18,7 +18,7 @@
   <h2>Welcome. Click open for more options</h2>
 </div>
   <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span>
-  <!-- <div class="center" [hidden]="progress">
+  <div class="center" [hidden]="!progress">
       <circle-progress
       [percent]="40"
       [radius]="100"
@@ -29,7 +29,7 @@
       [animation]="true"
       [animationDuration]="300"
     ></circle-progress>
-  </div> -->
+  </div>
   <router-outlet></router-outlet>
 </div>
 

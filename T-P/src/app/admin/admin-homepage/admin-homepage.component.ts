@@ -22,13 +22,10 @@ export class AdminHomepageComponent implements OnInit {
 
   ngOnInit() {
 if(window.location.href=='http://localhost:4200/admin-homepage'){
-    if(this.progress){
+    if(!this.progress){
       this.progress=!this.progress;
     }
-    console.log(window.location.href);
-  }
-
-    
+  }    
     this.openNav();
     this.getTBA();
     this.getAssigned();
@@ -61,16 +58,8 @@ if(window.location.href=='http://localhost:4200/admin-homepage'){
           this.accepted+=1;
         }
       }
-      // console.log(res.length);
-      // console.log(this.accepted);
-      // console.log(this.accepted/res.length*100);
-      
-      // this.perc = this.accepted/res.length*100;
-      console.log(this.perc);
+         console.log(this.perc);
     });
-    
-    
-
   }
 
   getApplicant(){
@@ -80,8 +69,14 @@ if(window.location.href=='http://localhost:4200/admin-homepage'){
   }
 
   toggle(){
-    if(!this.progress)
+    if(this.progress)
     this.progress = !this.progress;
+  }
+
+  home(){
+    if(!this.progress){
+      this.progress=!this.progress;
+    }
   }
 
 }

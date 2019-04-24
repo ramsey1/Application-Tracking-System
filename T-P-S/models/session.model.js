@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let sessionSchema = new Schema({
-    u_id: {type: Number},
-    token: { type: String },
+    u_email: {type: String,required:true},
+    token: { type: String,required:true },
     platform: { type: String },
     ip_add: { type: String },
     date: { type: String },

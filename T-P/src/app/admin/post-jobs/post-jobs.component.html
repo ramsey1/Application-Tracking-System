@@ -1,11 +1,11 @@
 <div class="post-jobs">
-<div class="container border border-secondary rounded  h-100 w-100">
+<div class="container rounded  h-100 w-100">
   <div class="row mx-auto">
     <div class="col-12">
       <h1>Post a Job</h1>
       <br>
       <form [formGroup]="postJobs" (ngSubmit)="onSubmit()">
-
+        <div class="container border-primary col-10" style="padding-top:20px">
           <div class="form-group">
               <label for="jobCode">Job Code:</label>
               <input type="text" formControlName="jobCode" class="form-control" id="jobCode" placeholder="Enter Job Code" name="jobCode">
@@ -66,9 +66,10 @@
                   <input type="checkbox" formControlName="priority"  id="priority" placeholder="Hot Job ?" name="priority" min="0" max="10">
                 </div>
 
-        <div class="form-group text-center">
+        <div class="form-group text-center center col-12">
           <button type="submit" [disabled]="!postJobs.valid" class="btn btn-success mt-2 mb-2 ">Submit</button>
         </div>
+      </div>
       </form>
     </div>
   </div>

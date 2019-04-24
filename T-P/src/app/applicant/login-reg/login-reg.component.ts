@@ -40,8 +40,15 @@ export class LoginRegComponent implements OnInit {
   initializeForm(){
 
     this.registerForm= new FormGroup({
-      username:new FormControl('',Validators.required),
-      email:new FormControl('',[Validators.required,Validators.email]),
+      username:new FormControl('',Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z\\s]*$')
+      ])),
+      email:new FormControl('',Validators.compose([
+        Validators.required,
+        Validators.pattern("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+      ])),
       password:new FormControl('',[Validators.required,Validators.minLength(6)]),
       role:new FormControl('')
     });
@@ -78,13 +85,13 @@ export class LoginRegComponent implements OnInit {
     this.registerForm.get('role').setValue('applicant');
     console.log(this.registerForm.value);
 
-    this.globalService.setServerRegister(this.registerForm.value).subscribe(res=>{
+   
+ this.globalService.setServerRegister(this.registerForm.value).subscribe(res=>{
       console.log(res);
       
     });
   
     this.router.navigate(['applicant-register'])
-
   }
 
 

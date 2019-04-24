@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { saveAs } from 'file-saver';
+import { JwtHelperService } from '@auth0/angular-jwt';
+ 
 
 @Component({
   selector: 'app-feedback',
@@ -23,29 +24,45 @@ export class FeedbackComponent implements OnInit {
 
   update:boolean;
 
+  token:any;
+
+   helper = new JwtHelperService();
+
   vidURL='http://localhost:3000/api/video/';
   resURL = 'http://localhost:3000/api/resume/';
 
-  constructor(private globalService : DataService,private router:Router, private cookieService :CookieService) { 
-    if(this.cookieService.check('email')){
-      this.i_email=this.cookieService.get('email');
-    }
-    else{
-    this.i_email = this.router.getCurrentNavigation().extras.state.email;
+  constructor(private globalService : DataService,private router:Router) { 
+ 
+  this.token= localStorage.getItem('token');
+  let dec = this.helper.decodeToken(this.token);
+ 
+  this.i_email = dec.email;
    }
+
+   ngOnInit() {
+        this.getAssigned();
+        this.getInterviewer();
   }
 
-  async ngOnInit() {
-    this.assigned = await this.globalService.getAssigned();
-    this.interviewers = await this.globalService.getInterviewer();
+  getAssigned(){
+    this.globalService.getServerAssigned().subscribe(res=>{
+      this.assigned=res;
+      console.log('assigned',res);
+    });
+  }
 
-    for(var i=0;i<this.interviewers.length;i++){
-      if(this.i_email==this.interviewers[i].email){
-        this.interviewerName = this.interviewers[i].name;
+  getInterviewer(){
+    this.globalService.getServerInterviewer().subscribe(res=>{
+      this.interviewers = res;
+      console.log('inter',res);
+      for(var i=0;i<this.interviewers.length;i++){
+        if(this.i_email==this.interviewers[i].email){
+          this.interviewerName = this.interviewers[i].name;
+        }
       }
-    }
-
-    this.getList();
+  
+      this.getList();
+    })
   }
 
   getList(){

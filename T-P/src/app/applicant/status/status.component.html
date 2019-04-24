@@ -1,3 +1,4 @@
+<div class="container">
 <div class="container" style="margin-top:80px">
 
   <div class="card-group">
@@ -35,8 +36,7 @@
 
 
 </div>
-<div [hidden]="reject">
-    <div [hidden]="accept">
+
 <div [hidden]="!displayStatus" style="padding-bottom:150px;margin-top:30px;margin-bottom:30px">
 
   <div class="row-mx-auto text-center mt-5 ">
@@ -49,6 +49,7 @@
       <thead class="thead-light">
         <tr>
           <th>Interviewer</th>
+          <th>Job Code</th>
           <th>Date</th>
           <th>Time</th>
           <th>Level</th>
@@ -59,6 +60,7 @@
       <tbody>
         <tr *ngFor="let status of status">
           <td>{{status.i_name}}</td>
+          <td>{{status.j_code}}</td>
           <td>{{status.date}}</td>
           <td>{{status.time}}</td>
           <td>{{status.level}}</td>
@@ -77,8 +79,6 @@
       </tbody>
     </table>
   </div>
-</div>
-</div>
 </div>
 
 <div [hidden]="!accept">
@@ -136,4 +136,5 @@
       </div>
   
     </div>
+</div>
 </div>

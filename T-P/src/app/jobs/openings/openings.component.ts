@@ -25,9 +25,11 @@ export class OpeningsComponent implements OnInit {
 
   getJobs(){
      this.globalService.getServerJobs().subscribe(res=>{
-      this.jobs = res;
-      console.log(this.jobs);
-      
+      for(var i=0;i<res.length;i++){
+        if(res[i]['is_active']){
+          this.jobs.push(res[i]);
+        }
+      }
      })
   }
 

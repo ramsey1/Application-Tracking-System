@@ -7,6 +7,7 @@
         <tr>
           <th>Candidate</th>
           <th>Interviewer</th>
+          <th>Job Code</th>
           <th>Date</th>
           <th>Time</th>
           <th>Level</th>
@@ -20,25 +21,27 @@
         <tr *ngFor="let status of assigned">
           <td>{{status.c_name}}</td>
           <td>{{status.i_name}}</td>
+          <td>{{status.j_code}}</td>
           <td>{{status.date}}</td>
           <td>{{status.time}}</td>
           <td>{{status.level}}</td>
-          <td>{{status.feedback}}</td>
+          <td *ngIf="status.feedback>0">{{status.feedback}}</td>
+          <td *ngIf="status.feedback<0" style="color:blue">Pending</td>
           <td>
             <div>
-              <input type="button" [disabled]="status.feedback<0" class="btn btn-success" value="Accept" name="Accept"
+              <input type="button"  [disabled]="status.feedback<0"  class="btn btn-success" value="Accept" name="Accept"
                 (click)="accept(status)">
             </div>
           </td>
           <td>
             <div>
-              <input type="button" [disabled]="status.feedback<0" class="btn btn-danger" value="Reject" name="Reject"
+              <input type="button" [disabled]="status.feedback<0"  class="btn btn-danger" value="Reject" name="Reject"
                 (click)="reject(status)">
             </div>
           </td>
           <td>
             <div>
-              <input type="button" [disabled]="status.feedback<0" class="btn btn-primary" value="Next" name="Next"
+              <input type="button" [disabled]="status.feedback<0"  class="btn btn-primary" value="Next" name="Next"
                 (click)="assignNext(status)">
             </div>
           </td>
@@ -66,13 +69,13 @@
           </div>
 
           <div class="form-group">
-            <label for="interviewer">Select Interviewer:</label>
-            <select class="form-control" formControlName="interviewerEmail">
-              <option [value]="interviewer.email" *ngFor="let interviewer of interviewers">
-                {{interviewer.name}}-----------{{interviewer.email}}
-              </option>
-            </select>
-          </div>
+              <label for="interviewer">Select Interviewer:</label>
+              <select class="form-control" formControlName="interviewerEmail">
+                <option [value]="interviewer.email" *ngFor="let interviewer of nextInt" >
+                    {{interviewer.name}}------{{interviewer.email}}  
+                </option>
+              </select>
+            </div>
 
 
 

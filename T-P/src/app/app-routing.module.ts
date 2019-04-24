@@ -21,6 +21,8 @@ import {
 } from './auth/auth-guard.service';
 import { SelectedCandidatesComponent } from './admin/selected-candidates/selected-candidates.component';
 
+import { ChangeCredentialsComponent } from './login/change-credentials/change-credentials.component';
+import { VerificationForPasswordComponent } from './login/verification-for-password/verification-for-password.component';
 
 
 const routes: Routes = [
@@ -37,6 +39,8 @@ const routes: Routes = [
     {path:'complete-applicants',component:SelectedCandidatesComponent}
   ]},
   {path:'login', component: PortalLoginComponent },
+  {path:'password-verification',component:VerificationForPasswordComponent},
+  {path:'change-password',component:ChangeCredentialsComponent},
   {path:'logout', component:PortalLoginComponent},
   {path:'applicant-register', component: RegisterComponent},
   {path:'applicant-status',canActivate: [AuthGuard] ,component: StatusComponent},

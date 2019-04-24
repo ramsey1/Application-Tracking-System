@@ -10,8 +10,12 @@ export class DataService {
   logout:boolean;
 
   invokeFirstComponentFunction = new EventEmitter();    
-  subsVar: Subscription;   
+  subsVar: Subscription;
 
+  jobsVar:Subscription;
+  invokeJob = new EventEmitter();
+
+  
   interviewerURL = 'http://localhost:3000/api/interviewer';
   jobsURL = 'http://localhost:3000/api/jobs';
   applicantURL = 'http://localhost:3000/api/applicant';
@@ -22,6 +26,7 @@ export class DataService {
   resumeURL = 'http://localhost:3000/api/resume';
   videoURL = 'http://localhost:3000/api/video';
   verifyingURL = 'http://localhost:3000/api/verification';
+  updatePasswordURL = 'http://localhost:3000/api/updatePassword';
 
   constructor(private http: HttpClient) { }
 
@@ -100,6 +105,10 @@ export class DataService {
     return this.http.get(this.tbaURL);
   }
 
+  getServerTBACodes():Observable<any>{
+    return this.http.get<any>(this.tbaURL+'/codes');
+  }
+
   setServerTBA(tba): Observable<any>{
    return this.http.post<any>(this.tbaURL, tba);
   }
@@ -141,6 +150,10 @@ export class DataService {
     this.invokeFirstComponentFunction.emit();    
   }
 
+  onJobPost(){
+    this.invokeJob.emit();
+  }
+
   login(data):Observable<any>{
     return this.http.post<any>(this.loginURL,data);
   }
@@ -161,6 +174,10 @@ export class DataService {
     this.getVerification(user).subscribe(res=>{
       return res;
     })
+  }
+
+  updateServerPassword(user):Observable<any>{
+    return this.http.put<any>(this.updatePasswordURL,user);
   }
   
   setLogin(log){

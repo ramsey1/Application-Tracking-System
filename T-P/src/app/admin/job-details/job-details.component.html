@@ -7,7 +7,7 @@
           <th>Job Profile</th>
           <th>Job Code</th>
           <th>Applied</th>
-          <th>Remove</th>
+          <th>Add/Remove</th>
         </tr>
       </thead>
       <tbody>
@@ -15,7 +15,8 @@
           <td>{{job.job_profile}}</td>
           <td>{{job.job_code}}</td>
           <td>{{job.aplied_cnt}}</td>
-          <td><button class="btn btn-danger" (click)="remove(job)">Remove</button></td>
+          <td *ngIf="job.is_active"><button class="btn btn-danger" (click)="remove(job)">Remove</button></td>
+          <td *ngIf="!job.is_active"><button class="btn btn-success" (click)="add(job)">Add</button></td>
         </tr>
       </tbody>      
     </table>
