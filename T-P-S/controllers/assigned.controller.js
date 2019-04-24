@@ -90,7 +90,7 @@ async function postAssignedData(req,res){
 }
 
 function updateAssigned(req,res){
-    Assigned.findOneAndUpdate({c_email:req.body.c_email},{
+    Assigned.findOneAndUpdate({c_email:req.body.c_email,level:req.body.level},{
         status:req.body.status,        
         feedback: req.body.feedback,
         comments: req.body.comments,

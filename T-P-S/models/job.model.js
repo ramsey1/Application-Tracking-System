@@ -16,7 +16,7 @@ let jobSchema = new Schema({
     aplied_cnt: { type: Number ,default :0},
     is_active: { type: Boolean ,default : true},
     priority: {type: Boolean},
-    adminInfo:{type:Boolean}
+    adminInfo:{type:String}
 })
 
 

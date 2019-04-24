@@ -32,6 +32,8 @@ const video = require('./routes/video.route');
 
 const verification = require('./routes/verification.route');
 
+const updatePassword = require('./routes/updatePassword.route');
+
 require('./config/passport');
 
 
@@ -64,6 +66,7 @@ app.use('/api/status', status);
 app.use('/api/resume',resume);
 app.use('/api/video',video);
 app.use('/api/verification',verification);
+app.use('/api/updatePassword',updatePassword)
 
 // async function sendOTP(){
 //     cookie = await way2sms.login('9871252265','me@way2sms');

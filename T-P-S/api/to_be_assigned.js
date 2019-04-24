@@ -9,4 +9,6 @@ router.get('/',(req,res)=>tbaController.getTBA(req,res));
 
 router.put('/:c_email',(req,res)=> tbaController.updateTBA(req,res));
 
+router.get('/codes', (req,res)=> tbaController.getJobCodes(req,res));
+
 module.exports = router;

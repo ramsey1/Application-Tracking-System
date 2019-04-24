@@ -74,3 +74,24 @@ module.exports.login = function(req, res) {
   })(req, res);
 
 };
+
+module.exports.update = function(req,res){
+  User.findOne({email:req.body.email},(err,person)=>{
+    if(person){
+      person.setPassword(req.body.password);
+
+      person.save(function(err) {
+        var token;
+        token = person.generateJwt();
+        res.status(200);
+        res.json({
+          "token" : token
+        });
+      });
+    }
+    else{
+      console.log('Not Found');
+    }
+  })
+
+};

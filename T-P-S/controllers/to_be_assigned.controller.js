@@ -59,8 +59,15 @@ function updateTBA(req,res){
     });
 }
 
+function getJobCodes(req,res){
+    ToBeAssigned.find({}).select('j_code -_id').then((tba)=>{
+        res.send(tba);
+    });
+}
+
 module.exports={
     toBeAssigned : toBeAssigned,
     getTBA : getTBA,
-    updateTBA: updateTBA
+    updateTBA: updateTBA,
+    getJobCodes : getJobCodes
 }
