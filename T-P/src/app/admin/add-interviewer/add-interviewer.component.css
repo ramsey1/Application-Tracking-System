@@ -19,4 +19,9 @@ form{
     text-align: center;
     font-family: 'Open Sans', sans-serif;
     font-weight:600;
+    color: #7a8687;
   }
+
+  .form-group  label{
+    color: #7a8687;
+}

@@ -40,8 +40,8 @@
     </div>
   </div> -->
 
- 
-    <!-- <div class="container  h-100 w-100 mt-5 form">
+
+<!-- <div class="container  h-100 w-100 mt-5 form">
         <div class="row mx-auto ">
           <div class="col-12">
         <h1>Assign Interviewer</h1>
@@ -186,80 +186,84 @@
 
 
 
-<div  class="assign">
+<div class="assign">
 
   <div class="row mx-auto">
-<div class="container mt-5 list">
-  <div class="ml-5">
-  <h4>Job Code</h4>  
-</div>
-    <div *ngFor="let job of TBA">
-      <div class="card-group">
-        <div class="card">
-          <div class="card-body">
-              <ul class="unstyled" style="list-style: none;">           
-            <li (click)="showStatus(job)">
-            <h6 class="card-title">{{job.j_code}}</h6>
-          </li>
-          </ul>
-          </div>
-        </div>
+    <div class="container mt-5 list">
+      <div class="ml-5">
+        <h4>Job Code</h4>
       </div>
-    </div>
-  </div>
-
-  <div [hidden]=!displayAssign >
-    <div class="container border border-secondary rounded  h-100 w-100 mt-5 form">
-        <div class="row mx-auto ">
-          <div class="col-12">
-        <h1>Assign Interviewer</h1>
-        <br>
-        <h3>{{jobCode}}</h3>
-        <form [formGroup]="assignInterviewer" (ngSubmit)= "onSubmit()">
-  
-          <div class="form-group">
-            <label for="candidate">Select Candidate:</label>
-            <select class="form-control" formControlName="candidateEmail">
-              <option [value]="candidate" *ngFor="let candidate of candidates" >
-                {{candidate}}
-              </option>
-            </select>
-          </div>
-  
-          <div class="form-group">
-            <label for="interviewer">Select Interviewer:</label>
-            <select class="form-control" formControlName="interviewerEmail">
-              <option [value]="interviewer.email" *ngFor="let interviewer of interviewers" >
-                  {{interviewer.name}}------{{interviewer.email}}  
-              </option>
-            </select>
-          </div>
-  
-          
-  
-          <div class="form-group">
-            <label for="role">Schedule:</label>
-            <div class="clearfix">
-              <div class="form-group col-6 float-left">
-                <label>Select Date</label>
-                <input class="form-control calendar" type="date" formControlName="date">
-              </div>
-          
-              <div class="form-group col-6 float-right">
-                <label for="role">Slot:</label>
-                <select name="" id="" class="form-control" formControlName="time">
-                <option *ngFor="let slot of interviewSlots" [value]="slot">{{slot}}</option>
-              </select>
-              </div>
+      <div *ngFor="let job of TBA">
+        <div class="card-group">
+          <div class="card">
+            <div class="card-body">
+              <ul class="unstyled" style="list-style: none;">
+                <li (click)="showStatus(job)">
+                  <h6 class="card-title">{{job.j_code}}</h6>
+                </li>
+              </ul>
             </div>
           </div>
-  
-          <div class="form-group text-center">
-            <button type="submit" [disabled]="!assignInterviewer.valid" class="btn btn-success mt-2 mb-2 ">Submit</button>
-          </div>
-        </form>
         </div>
       </div>
     </div>
-  </div>
+
+    <div [hidden]=!displayAssign>
+      <div class="container rounded  h-100 w-100 mt-5 form">
+        <div class="row mx-auto ">
+          <div class="col-12">
+            <h1>Assign Interviewer</h1>
+            <br>
+            <form [formGroup]="assignInterviewer" (ngSubmit)="onSubmit()">
+              <div class="form-group pl-5 ml-3">
+                <h3>{{jobCode}}</h3>
+              </div>
+              <div class="container border-primary col-10" style="padding-top:20px">
+                <div class="form-group">
+                  <label for="candidate">Select Candidate:</label>
+                  <select class="form-control" formControlName="candidateEmail">
+                    <option [value]="candidate" *ngFor="let candidate of candidates">
+                      {{candidate}}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="interviewer">Select Interviewer:</label>
+                  <select class="form-control" formControlName="interviewerEmail">
+                    <option [value]="interviewer.email" *ngFor="let interviewer of interviewers">
+                      {{interviewer.name}}------{{interviewer.email}}
+                    </option>
+                  </select>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label for="role">Schedule:</label>
+                  <div class="clearfix">
+                    <div class="form-group col-6 float-left">
+                      <label>Select Date</label>
+                      <input class="form-control calendar" type="date" formControlName="date">
+                    </div>
+
+                    <div class="form-group col-6 float-right">
+                      <label for="role">Slot:</label>
+                      <select name="" id="" class="form-control" formControlName="time">
+                        <option *ngFor="let slot of interviewSlots" [value]="slot">{{slot}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group text-center">
+                  <button type="submit" [disabled]="!assignInterviewer.valid"
+                    class="btn btn-success mt-2 mb-2 ">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>

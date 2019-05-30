@@ -3,6 +3,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top rounded-bottom">
       <a class="navbar-brand" [routerLink]="['']">Interview Portal</a>
       <ul class="navbar-nav ml-auto">
+        <span *ngIf="user"><li class="nav-item"><a class="nav-link disabled" style="color:white">Welcome {{user | uppercase}} |</a></li></span>
         <li class="nav-item">
           <a class="navbar-brand" [hidden]="forLogin" [routerLink]="['login']" (click)="login()">Login</a>
           <a class="navbar-brand" [hidden]="!isLogin" [routerLink]="['login']" (click)="toggle()">Logout</a>

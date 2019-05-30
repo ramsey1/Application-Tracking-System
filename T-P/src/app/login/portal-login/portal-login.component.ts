@@ -66,7 +66,7 @@ export class PortalLoginComponent implements OnInit {
       else if(res.role=='applicant'){
         this.router.navigate(['applicant-status'],{state:{email:this.email}});
       }
-      this.globalService.onFirstComponentButtonClick();
+      this.globalService.onFirstComponentButtonClick(this.email);
 
     })
 

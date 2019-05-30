@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-reg',
@@ -19,7 +20,7 @@ export class LoginRegComponent implements OnInit {
   j_id:any;
   job_code:any;
   
-  constructor(private router:Router,private globalService: DataService) { 
+  constructor(private router:Router,private globalService: DataService,private toastr:ToastrService) { 
     if(localStorage.getItem('jobCode')){
       this.job_code = localStorage.getItem('jobCode');
       this.j_id = localStorage.getItem('j_id');
@@ -88,6 +89,7 @@ export class LoginRegComponent implements OnInit {
    
  this.globalService.setServerRegister(this.registerForm.value).subscribe(res=>{
       console.log(res);
+      this.toastr.success('Registered Successfully');
       
     });
   

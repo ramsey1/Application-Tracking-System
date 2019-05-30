@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { slots } from '../slots';
 import { element } from '@angular/core/src/render3';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-interview-status',
@@ -12,7 +14,7 @@ import { element } from '@angular/core/src/render3';
 })
 export class InterviewStatusComponent implements OnInit {
 
-  constructor(private globalService: DataService,private router:Router) {
+  constructor(private globalService: DataService,private router:Router,private toastr:ToastrService) {
    
     this.initializeForm();
    }
@@ -151,7 +153,8 @@ export class InterviewStatusComponent implements OnInit {
     // console.log(status);
     this.globalService.updateServerAssigned(status).subscribe(res=>{
       console.log(res);
-      alert(res.msg);
+      // alert(res.msg);
+      this.toastr.success('Selected');
     });
 
     for(var i=0;i<this.assigned.length;i++){
@@ -168,7 +171,8 @@ export class InterviewStatusComponent implements OnInit {
     // console.log(status);
     this.globalService.updateServerAssigned(status).subscribe(res=>{
       console.log(res);
-      alert(res.msg);
+      // alert(res.msg);
+      this.toastr.warning('Rejected');
     });
 
     for(var i=0;i<this.assigned.length;i++){

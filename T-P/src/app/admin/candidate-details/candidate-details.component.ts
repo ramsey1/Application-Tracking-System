@@ -15,6 +15,8 @@ resum:any;
 displayVideo:boolean;
 displayResume:boolean;
 
+applicant:any;
+
 vidURL='http://localhost:3000/api/video/';
 resURL = 'http://localhost:3000/api/resume/';
 
@@ -44,7 +46,7 @@ resSrc = '';
       // this.resum = res;
       // this.displayResume = !this.displayResume;
     })
-    this.resumeShow(applicant);
+    // this.resumeShow(applicant);
   }
 
   intro(applicant){
@@ -59,7 +61,7 @@ resSrc = '';
       // this.displayVideo = !this.displayVideo;
     });
     // this.displayVideo = !this.displayVideo;
-    this.introShow(applicant);
+    // this.introShow(applicant);
   }
 
   introShow(candidate){
@@ -67,8 +69,14 @@ resSrc = '';
     this.vidSrc = 'http://localhost:3000/api/video/'
     console.log(candidate);
     this.vidSrc = this.vidSrc+candidate.email ;
-    console.log(this.vidSrc);    
+    console.log(this.vidSrc);
+    this.applicant = candidate; 
+    // console.log(this.applicant);
+       
     this.displayVideo = true;
+    document.getElementById('contentVid').scrollIntoView();
+    // var vidJump = document.getElementById('video');
+    // vidJump.scrollIntoView();
   }
 
   resumeShow(candidate){
@@ -76,7 +84,10 @@ resSrc = '';
     this.resSrc = 'http://localhost:3000/api/resume/';
     this.resSrc = this.resSrc+candidate.email;
     console.log(this.resSrc);
+    this.applicant = candidate;
     this.displayResume = true;
+  document.getElementById('content').scrollIntoView();
+    // resJump.scrollIntoView();
   }
 
 

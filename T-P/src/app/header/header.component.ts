@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,12 @@ export class HeaderComponent implements OnInit {
   isLogin : boolean;
 
   forLogin : boolean;
+
+  user:any;
+
+  token:any;
+
+  helper = new JwtHelperService();
 
   constructor(private globalService:DataService,private router:Router,private cookieService:CookieService) {
     if(localStorage.getItem('token')){
@@ -26,13 +33,31 @@ export class HeaderComponent implements OnInit {
     }
     if (this.globalService.subsVar==undefined) {    
       this.globalService.subsVar = this.globalService.    
-      invokeFirstComponentFunction.subscribe((name:string) => {    
+      invokeFirstComponentFunction.subscribe((name:string) => {
+        console.log("Email from service",name);
+        this.globalService.getUserName(name).subscribe(res=>{
+          this.user = res[0].username;
+          console.log(res);
+          
+          console.log("Logged in user",this.user);
+          
+        });
+            
         this.logoutNav();    
       });    
     }    
   }
 
   ngOnInit() {
+    // console.log("ON HEader");
+    if(localStorage.getItem('token')){
+      this.token= localStorage.getItem('token');
+  let dec = this.helper.decodeToken(this.token);
+  this.globalService.getUserName(dec.email).subscribe(res=>{
+    this.user = res[0].username;
+  })
+    }
+    
     if(this.isLogin)
         console.log(typeof(this.forLogin));
    if(this.globalService.getLogin())
@@ -58,6 +83,7 @@ export class HeaderComponent implements OnInit {
 
 
   toggle(){
+    this.user = '';
     this.isLogin = !this.isLogin;
     this.forLogin=!this.forLogin;
     console.log(this.cookieService.get('email'));

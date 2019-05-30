@@ -1,42 +1,73 @@
 <div class="candidate-details">
-<div class="container" style="margin-top:30px">
+  <div class="container" style="margin-top:30px">
 
-  <table class="table  table-hover table-sm">
-    <thead class="thead-light">
-      <tr>
-        <th>Candidate Name</th>
-        <th>Candidate Email</th>
-        <th>Resume</th>
-        <th>Intro video</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let candidate of applicants">
-        <td>{{candidate.fullName}}</td>
-        <td>{{candidate.email}}</td>
-        <td><button class="btn btn-info" (click)="resume(candidate)">Resume</button></td>
-        <td><button class="btn btn-info" (click)="intro(candidate)">Video</button></td>
-        
-      </tr>
-    </tbody>
-    
-    <div *ngIf="displayVideo">
-      <!-- <video controls id="videoPlayer" width="75%" height="75%">
-        <source [src]="vidSrc | safe" type="video/mp4" />
-        Browser not supported
-      </video> -->
+    <table class="table  table-hover table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>Candidate Name</th>
+          <th>Candidate Email</th>
+          <th>Intro video</th>
+          <th>Resume</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let candidate of applicants">
+          <td>{{candidate.fullName}}</td>
+          <td>{{candidate.email}}</td>
+          <td>
+            <div class="row">
+              <div class="col-6">
+                <img src="https://img.icons8.com/color/48/000000/show-property.png" (click)="introShow(candidate)">
+              </div>
+              <div class="col-6">
+                <img src="https://img.icons8.com/flat_round/64/000000/downloading-updates.png"
+                  (click)="intro(candidate)">
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="row">
+              <div class="col-6">
+                <img src="https://img.icons8.com/color/48/000000/show-property.png" (click)="resumeShow(candidate)">
+              </div>
+              <div class="col-6">
+                <img src="https://img.icons8.com/flat_round/64/000000/downloading-updates.png"
+                  (click)="resume(candidate)">
+              </div>
+            </div>
+          </td>
+
+        </tr>
+      </tbody>
 
 
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" [src]="vidSrc | safe"></iframe>
-</div>
-    </div>
-    
-    
+    </table>
+    <div class="clearfix mt-5">
 
-    <div *ngIf="displayResume">
-      <iframe [src]="resSrc| safe" frameborder="0"></iframe>
-    </div>
-  </table>
-</div>
+        <div id="contentVid">
+          </div>
+        <div id="video" class="col-12 pb-4" *ngIf="displayVideo">
+          
+          <h1><label for="name">{{applicant.fullName}}</label></h1>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" [src]="vidSrc | safe" width="75%" height="75%"></iframe>
+          </div>
+        </div>
+  
+  
+        <div id="content">
+          </div>
+
+        <div  class="col-12 pt-5 mx-auto" *ngIf="displayResume">
+            <h1><label for="name">{{applicant.fullName}}</label></h1>
+            <span id="resume">
+          <iframe  [src]="resSrc| safe" frameborder="0" width="75%" height="900px"></iframe>
+        </span>
+        </div>
+       
+           
+       
+      </div>
+  </div>
 </div>

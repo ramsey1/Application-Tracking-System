@@ -6,6 +6,7 @@ import { CandidateDetailsComponent } from '../candidate-details/candidate-detail
 import { Router } from '@angular/router';
 import { slots } from '../slots';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-assign-interviewer',
@@ -14,7 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AssignInterviewerComponent implements OnInit {
 
-  constructor(private globalService : DataService,private router:Router,private cookieService:CookieService) { 
+  constructor(private globalService : DataService,private router:Router,private cookieService:CookieService,private toastr :ToastrService) { 
     if(this.cookieService.check('email')){
       this.adminInfo=this.cookieService.get('email');
     } 
@@ -189,7 +190,8 @@ export class AssignInterviewerComponent implements OnInit {
       if(this.assignInterviewer.value.interviewerEmail == this.interviewers[i].email){
         for(var j=0;j<this.interviewers[i].isAvailable.length;j++){
         if(this.assignInterviewer.get('date').value+this.assignInterviewer.get('time').value == this.interviewers[i].isAvailable[j]){
-          alert('Not Avialable Choose another time or date');
+          // alert('Not Avialable Choose another time or date');
+          this.toastr.warning('Not Avialable Choose another time or date');
           return;
         }
       }
@@ -198,10 +200,11 @@ export class AssignInterviewerComponent implements OnInit {
 
     this.globalService.setServerAssigned(this.assignInterviewer.value).subscribe(res=>{
       console.log(res);
+      this.toastr.success('Assigned successfully');
     });
 
     
-    alert('assigned successfully');
+    // alert('assigned successfully');
     this.assignInterviewer.reset();
     // this.router.navigate(['admin-homepage/interview-status']);
     
@@ -209,7 +212,6 @@ export class AssignInterviewerComponent implements OnInit {
 
   selectionChanged(event){
     console.log(event);
-    
   }
 
 }

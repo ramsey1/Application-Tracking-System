@@ -3,6 +3,8 @@ import { DataService } from 'src/app/data.service';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ToastrService } from 'ngx-toastr';
+
  
 
 @Component({
@@ -31,7 +33,14 @@ export class FeedbackComponent implements OnInit {
   vidURL='http://localhost:3000/api/video/';
   resURL = 'http://localhost:3000/api/resume/';
 
-  constructor(private globalService : DataService,private router:Router) { 
+  vidSrc = '';
+  resSrc = '';
+  applicant : any;
+
+  displayResume:boolean = false;
+  displayVideo: boolean = false;
+
+  constructor(private globalService : DataService,private router:Router,private toastr:ToastrService) { 
  
   this.token= localStorage.getItem('token');
   let dec = this.helper.decodeToken(this.token);
@@ -77,7 +86,9 @@ export class FeedbackComponent implements OnInit {
   feedback(mapped){
     console.log(mapped);
     this.globalService.updateServerAssigned(mapped).subscribe(res=>{
+     this.toastr.success('Submitted successfully');
       console.log(res);
+      location.reload();
     });
     this.update = !this.update;
   }
@@ -103,6 +114,30 @@ export class FeedbackComponent implements OnInit {
   toggle(){
     this.update = !this.update;
   }
+
+  introShow(candidate){
+    this.displayVideo = false;
+    this.vidSrc = 'http://localhost:3000/api/video/'
+    console.log(candidate);
+    this.vidSrc = this.vidSrc+candidate.c_email ;
+    console.log(this.vidSrc);
+    this.applicant = candidate; 
+    // console.log(this.applicant);
+       
+    this.displayVideo = true;
+  }
+
+  resumeShow(candidate){
+    this.displayResume = false;
+    this.resSrc = 'http://localhost:3000/api/resume/';
+    this.resSrc = this.resSrc+candidate.c_email;
+    console.log(this.resSrc);
+    this.applicant = candidate;
+    this.displayResume = true;
+  }
+
+
+
   }
 
 

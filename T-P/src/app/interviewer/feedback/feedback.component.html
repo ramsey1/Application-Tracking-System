@@ -33,14 +33,54 @@
         <td>{{mapped.date}} {{mapped.time}}</td>
         <td><input type="number" [disabled]="mapped.isSubmitted" [(ngModel)]="mapped.feedback" class="marks" min="1"
             max="10" required>/10</td>
-        <td><button class="btn btn-info" [disabled]="mapped.isSubmitted" (click)="resume(mapped)">Resume</button></td>
-        <td><button class="btn btn-info" [disabled]="mapped.isSubmitted" (click)="intro(mapped)">Video</button></td>
+
+        <td>
+          <div class="row">
+            <div class="col-6">
+              <img src="https://img.icons8.com/color/48/000000/show-property.png" (click)="resumeShow(mapped)">
+            </div>
+            <div class="col-6">
+              <img src="https://img.icons8.com/flat_round/64/000000/downloading-updates.png" (click)="resume(mapped)">
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div class="row">
+            <div class="col-6">
+              <img src="https://img.icons8.com/color/48/000000/show-property.png" (click)="introShow(mapped)">
+            </div>
+            <div class="col-6">
+              <img src="https://img.icons8.com/flat_round/64/000000/downloading-updates.png" (click)="intro(mapped)">
+            </div>
+          </div>
+        </td>
+
+        <!-- <td><button class="btn btn-info" [disabled]="mapped.isSubmitted" (click)="resume(mapped)">Resume</button></td>
+        <td><button class="btn btn-info" [disabled]="mapped.isSubmitted" (click)="intro(mapped)">Video</button></td> -->
         <td><input type="text" [disabled]="mapped.isSubmitted" [(ngModel)]="mapped.comments" required></td>
         <td><button class="btn btn-primary" [disabled]="mapped.isSubmitted" (click)="feedback(mapped)">submit</button>
         </td>
       </tr>
     </tbody>
   </table>
+  <div class="clearfix mt-5">
+
+    <div class="col-12 pb-4" *ngIf="displayVideo">
+
+      <h1><label for="name">{{applicant.fullName}}</label></h1>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" [src]="vidSrc | safe" width="75%" height="75%"></iframe>
+      </div>
+    </div>
+
+
+
+    <div class="col-12 pt-5 mx-auto" *ngIf="displayResume">
+      <h1><label for="name">{{applicant.fullName}}</label></h1>
+      <iframe [src]="resSrc| safe" frameborder="0" width="75%" height="900px"></iframe>
+    </div>
+  </div>
 </div>
 
 

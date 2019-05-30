@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-verification',
@@ -21,10 +22,11 @@ export class VerificationComponent implements OnInit {
   j_id:any;
 
   user={
-    email:""
+    email:"",
+    token:""
   };
 
-  constructor(private route: Router,private globalService : DataService) {
+  constructor(private route: Router,private globalService : DataService,private toastr:ToastrService) {
     if (localStorage.getItem('vmob')) {
       this.mob = localStorage.getItem('vmob');
       this.email = localStorage.getItem('email');
@@ -44,7 +46,7 @@ export class VerificationComponent implements OnInit {
     this.user.email = this.email;
     this.jobCode = localStorage.getItem('jobCode');
     this.j_id = localStorage.getItem('j_id');
-    this.getOTP();
+    // this.getOTP();
     this.getJob();
 
   }
@@ -58,7 +60,7 @@ export class VerificationComponent implements OnInit {
   getOTP(){
     this.globalService.getVerification(this.user).subscribe(res=>{
       this.verification = res;
-      // console.log(res);
+      console.log(res);
       
       console.log(this.verification);
     });
@@ -73,29 +75,58 @@ export class VerificationComponent implements OnInit {
 
 
   onSubmit() {
+    this.user.token = this.verificationForm.get('otp').value;
 
-    if(this.verificationForm.get('otp').value!=this.verification.token){
-      alert('Wrong OTP');
-      this.verificationForm.reset();
-      return;
-    }
+    this.globalService.verifyApplicant(this.user).subscribe(res=>{
+      if(res.msg == 'success'){
+        // console.log(this.verificationForm.get('otp').value==this.verification.token);
 
-    console.log(this.verificationForm.get('otp').value==this.verification.token);
-
-    this.job.aplied_cnt = this.job.aplied_cnt + 1;
-
-    this.globalService.updateServerJobs(this.job).subscribe(res=>{
-      console.log(res);
+        this.job.aplied_cnt = this.job.aplied_cnt + 1;
+    
+        this.globalService.updateServerJobs(this.job).subscribe(res=>{
+          console.log(res);
+        })
+    
+        localStorage.removeItem('vmob');
+        localStorage.removeItem('email');
+        localStorage.removeItem('jobCode');
+        localStorage.removeItem('j_id');
+    
+        // alert('Verified Succesfully');
+        this.toastr.success('Verified Sucessfully');
+    
+        this.route.navigate(['']);
+      }
+      else{
+        // alert('Wrong OTP');
+        this.toastr.error("Wrong OTP");
+        this.verificationForm.reset();
+        return;
+      }
     })
 
-    localStorage.removeItem('vmob');
-    localStorage.removeItem('email');
-    localStorage.removeItem('jobCode');
-    localStorage.removeItem('j_id');
+    // if(this.verificationForm.get('otp').value!=this.verification.token){
+    //   alert('Wrong OTP');
+    //   this.verificationForm.reset();
+    //   return;
+    // }
 
-    alert('Verified Succesfully');
+    // console.log(this.verificationForm.get('otp').value==this.verification.token);
 
-    this.route.navigate(['']);
+    // this.job.aplied_cnt = this.job.aplied_cnt + 1;
+
+    // this.globalService.updateServerJobs(this.job).subscribe(res=>{
+    //   console.log(res);
+    // })
+
+    // localStorage.removeItem('vmob');
+    // localStorage.removeItem('email');
+    // localStorage.removeItem('jobCode');
+    // localStorage.removeItem('j_id');
+
+    // alert('Verified Succesfully');
+
+    // this.route.navigate(['']);
   }
 
 }

@@ -9,17 +9,17 @@
       <div class="card-group">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Profile : {{job.job_profile}}</h4>
-            <p class="card-text "><b>Base Salary :</b> {{job.base_sal}}</p>
+            <h4 class="card-title">Profile : <span style="color: #F26522">{{job.job_profile}}</span></h4>
+            <p class="card-text "><b>Base Salary :</b> <span style="color:#008391">{{job.base_sal}}</span></p>
             <ul class="card-text">
-              <li><b>Enrollment Type :</b> {{job.enrollment_type}}</li>
-              <li><b>Educational Requirement :</b>{{job.educational_req}}</li>
-              <li><b>Skills Requirement :</b> {{job.skills_req}}</li>
-              <li><b>Experience Required :</b> {{job.experience_req}}</li>
-              <li><b>Location :</b> {{job.job_location}}</li>
-              <li><b>Vacancies :</b> {{job.vacancies}}</li>
+              <li><b>Enrollment Type :</b><span style="color:#008391">{{job.enrollment_type}}</span> </li>
+              <li><b>Educational Requirement :</b> <span style="color:#008391">{{job.educational_req}}</span></li>
+              <li><b>Skills Requirement :</b> <span style="color:#008391">{{job.skills_req}}</span></li>
+              <li><b>Experience Required :</b> <span style="color:#008391">{{job.experience_req}}</span></li>
+              <li><b>Location :</b> <span style="color:#008391">{{job.job_location}}</span></li>
+              <li><b>Vacancies :</b> <span style="color:#008391">{{job.vacancies}}</span></li>
             </ul>
-            <p><b>Description :</b> {{job.jod_description}}</p>
+            <p><b>Description :</b><span style="color:#7a8687"> {{job.jod_description}}</span></p>
             <button type="submit" class="btn btn-secondary btn-lg mt-2" (click)="apply(job)">Apply</button>
           </div>
         </div>

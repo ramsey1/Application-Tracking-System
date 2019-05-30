@@ -27,6 +27,7 @@ export class DataService {
   videoURL = 'http://localhost:3000/api/video';
   verifyingURL = 'http://localhost:3000/api/verification';
   updatePasswordURL = 'http://localhost:3000/api/updatePassword';
+  userURL = 'http://localhost:3000/api/users'
 
   constructor(private http: HttpClient) { }
 
@@ -55,6 +56,10 @@ export class DataService {
   
   getServerJobs() :Observable<Object[]>{
     return this.http.get<Object[]>(this.jobsURL);
+  }
+
+  getAllJobs(): Observable<any>{
+    return this.http.get<any>(this.jobsURL+'/all');
   }
 
   getSpecificJobs(j_id):Observable<any>{
@@ -146,8 +151,8 @@ export class DataService {
    }
 
 
-  onFirstComponentButtonClick() {    
-    this.invokeFirstComponentFunction.emit();    
+  onFirstComponentButtonClick(name:string) {    
+    this.invokeFirstComponentFunction.emit(name);    
   }
 
   onJobPost(){
@@ -186,5 +191,13 @@ export class DataService {
 
   getLogin(){
     return this.logout;
+  }
+
+  getUserName(params): Observable<any>{
+    return this.http.get<any>(this.userURL+'/'+params);
+  }
+
+  verifyApplicant(applicant):Observable<any>{
+    return this.http.post<any>(this.verifyingURL,applicant);
   }
 }

@@ -5,6 +5,8 @@ import { highestGraduation } from '../../applicant/highestGraduation';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { EventEmitterServices } from 'src/app/service/evnet-emitter.service';
+import { ToastrService } from 'ngx-toastr';
+
  
 const helper = new JwtHelperService();
 
@@ -15,7 +17,7 @@ const helper = new JwtHelperService();
 })
 export class PostJobsComponent implements OnInit {
 
-  constructor(private globalService :DataService,private router:Router,private emittService:EventEmitterServices) {
+  constructor(private globalService :DataService,private router:Router,private emittService:EventEmitterServices,private toastr:ToastrService) {
     this.token = localStorage.getItem('token');
     let dec= helper.decodeToken(this.token);
     this.adminInfo = dec.email;
@@ -72,17 +74,23 @@ export class PostJobsComponent implements OnInit {
     
     console.log(this.postJobs.value);
     this.globalService.setServerJobs(this.postJobs.value).subscribe(res=>{
+      if(res.msgex){
+        // alert(res.msgex);
+        this.toastr.error(res.msgex);
+        return;
+      }
+      else{
+        // alert(res.msg);
+        this.toastr.success(res.msg);
+      }
       console.log(res);
       this.emittService.onFirstComponentButtonClick();
     });
    
     // this.globalService.onJobPost();
 
-    
-
-
     this.postJobs.reset();
-    alert('Posted SucessFully');
+    // alert('Posted SucessFully');
     // this.router.navigate(['admin-homepage/job-details'])
   }
 }

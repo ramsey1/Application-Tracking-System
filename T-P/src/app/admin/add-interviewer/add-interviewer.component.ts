@@ -61,6 +61,7 @@ export class AddInterviewerComponent implements OnInit {
     this.addInterviewer.get('adminInfo').setValue(this.adminInfo);
     console.log(this.addInterviewer.value);
     this.globalService.setServerInterviewer(this.addInterviewer.value).subscribe(res=>{
+      this.toastr.success('Added successfully');
       console.log(res);
     })
 
@@ -70,7 +71,7 @@ export class AddInterviewerComponent implements OnInit {
        console.log('reg');
       });
 
-      alert('Added Successfully');
+      // alert('Added Successfully');
 
     this.addInterviewer.reset();
     // this.router.navigate(['admin-homepage/interviewer-details']);

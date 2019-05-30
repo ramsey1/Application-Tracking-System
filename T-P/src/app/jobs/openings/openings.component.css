@@ -5,7 +5,8 @@ li{
 li:hover{
     color: white;
     /* background-color: #696969; */
-    background-color:#AC67B6;
+    /* background-color:#AC67B6; */
+    background-color: #7a8687;
 }
 
 .btn{
@@ -36,7 +37,7 @@ img{
 
 
 .card-text {
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Helvetica Neue Bold';
 }
 
@@ -52,7 +53,7 @@ img{
 }
 
 .card-heading {
-  font-size: 12px;
+  font-size: 14px;
   color: #7a8687
 }
 
@@ -89,7 +90,7 @@ img{
 
 .card-text-disclaimer {
   color: #7a8687;
-  font-size: 10px;
+  font-size: 12px;
   font-family: 'Helvetica Neue Roman';
 }
 
@@ -126,4 +127,11 @@ img{
     background-position: right bottom;
     background-size: auto;
   }
+}
+.card-body{
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+p{
+  font-size: 14px;
 }
