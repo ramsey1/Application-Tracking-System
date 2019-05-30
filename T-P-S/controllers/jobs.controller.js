@@ -4,7 +4,8 @@ function jobPost(req, res) {
 
     Jobs.findOne({ job_code: req.body.jobCode }, (err, job) => {
         if (job) {
-            res.send('already exist');
+            // res.send('already exist');
+            res.json({'msgex': 'Job already exixts'});
             return;
         }
 
@@ -29,7 +30,8 @@ function jobPost(req, res) {
                 if (err)
                     console.log('Job Post Error ->', err);
                 else
-                    res.send(req.body);
+                    // res.send(req.body);
+                    res.json({'msg': 'Job posted sucessfully'});
             });
         }
 
@@ -59,19 +61,32 @@ function getJobs(req, res) {
     });
 }
 
+function getAll(req,res){
+    Jobs.find({}).then((jobs)=>{
+        res.send(jobs);
+    })
+}
+
 function updateJobs(req, res) {
     Jobs.findOneAndUpdate({ _id: req.body._id }, {
         aplied_cnt: req.body.aplied_cnt
     }).then((job) => {
-        res.send('updated');
+        res.json({'msg':'updated'});
     })
 }
 
 function softDeleteJobs(req,res){
+    console.log(req.body);
+    
+    // Jobs.findOneAndUpdate({ _id: req.body._id }, {
+    //     is_active:false
+    // }).then((job) => {
+    //     res.json({'msg':'removed'});
+    // })
     Jobs.findOneAndUpdate({ _id: req.body._id }, {
-        is_active:false
+        is_active:req.body.is_active
     }).then((job) => {
-        res.send('removed');
+        res.json({'msg':'altered'});
     })
 }
 
@@ -89,5 +104,6 @@ module.exports = {
     getJobs: getJobs,
     updateJobs: updateJobs,
     getSpecificJob: getSpecificJob,
-    softDeleteJobs: softDeleteJobs
+    softDeleteJobs: softDeleteJobs,
+    getAll : getAll
 }

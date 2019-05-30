@@ -5,6 +5,8 @@ jobController = require('../controllers/jobs.controller');
 
 router.get('/',(req,res)=> jobController.getJobs(req,res));
 
+router.get('/all',(req,res)=>jobController.getAll(req,res));
+
 router.get('/:j_id',(req,res)=> jobController.getSpecificJob(req,res));
 
 router.post('/', (req,res)=>jobController.jobPost(req,res));
